@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="bg-green-100">
+
+    
+        <div id="employeeSidebar" class="hidden bg-white p-6 rounded-lg shadow-lg w-full">
+           
+                <div class="flex justify-between items-right">
+                    <h3 class="text-xl font-semibold">Add New Employee</h3>
+                    <button onclick="closeSidebar()" class="text-red-500 text-2xl">&times;</button>
+                </div>
+                
+                <!-- Personal Details Section -->
+                <h4 class="text-lg font-semibold mt-4">Personal Details</h4>
+                <form id="employeeForm"class="w-full max-w-lg">
+                 <div class="flex flex-wrap -mx-3 mb-6">
+                    <div id="empName" class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                       First Name 
+                     </label>
+                     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Name"   required>
+                       <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                      </div>
+                     <div class="w-full md:w-1/2 px-3">
+                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                     Last Name
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Name">
+                     </div>
+                     </div>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                       Password
+                       </label>
+                          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************">
+                           <p class="text-gray-600 text-xs italic">Make it as long</p>
+                        </div>
+                     </div>
+                    <div class="flex flex-wrap -mx-3 mb-2">
+                      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                      City
+                     </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque">
+                   </div>
+                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                        State
+                    </label>
+                 <div class="relative">
+                  <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                      <option>TamilNadu</option>
+                   <option>Kerala</option>
+                    <option>Karnataka</option>
+                    </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                    </div>
+                 </div>
+                 <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+                       Zip
+                     </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210">
+                  </div>
+
+                    <label class="block mt-2">Role</label>
+                    <input type="text" id="empRole" class="border w-full p-2 rounded" required>
+        
+                    <label class="block mt-2">Date of Birth</label>
+                    <input type="date" id="empDob" class="border w-full p-2 rounded" required>
+        
+                    <label class="block mt-2">Current Address</label>
+                    <textarea id="empCurrentAddress" class="border w-full p-2 rounded" required></textarea>
+        
+                    <label class="block mt-2">Permanent Address</label>
+                    <textarea id="empPermanentAddress" class="border w-full p-2 rounded" required></textarea>
+        
+                    <label class="block mt-2">Phone Number</label>
+                    <input type="tel" id="empPhone" class="border w-full p-2 rounded" required>
+        
+                    <label class="block mt-2">Secondary Mobile Number (Emergency)</label>
+                    <input type="tel" id="empPhoneSecondary" class="border w-full p-2 rounded">
+        
+                    <!-- Qualification Section -->
+                    <h4 class="text-lg font-semibold mt-4">Qualification</h4>
+                    <label class="block mt-2">Highest Degree</label>
+                    <input type="text" id="empDegree" class="border w-full p-2 rounded" required>
+        
+                    <!-- Previous Employment Section -->
+                    <h4 class="text-lg font-semibold mt-4">Previous Employment</h4>
+                    <label class="block mt-2 mb-2">If Experienced</label>
+                    <input type="text" id="empPrevEmployment" class="border w-full p-2 rounded" placeholder="Company Name">
+        
+                    <!-- Current CTC Section -->
+                    <h4 class="text-lg font-semibold mt-4">Current CTC</h4>
+                    <label class="block mt-2">Per Annum</label>
+                    <input type="number" id="empCtc" class="border w-full p-2 rounded" required>
+        
+                    <!-- Certifications Upload Section -->
+                    <h4 class="text-lg font-semibold mt-4">Certifications</h4>
+                    <label class="block mt-2">Upload Documents (PDF, DOC)</label>
+                    <input type="file" id="empCertifications" multiple class="border w-full p-2 rounded" accept=".pdf,.doc,.docx">
+        
+                    <!-- Buttons -->
+                    <div class="flex justify-end space-x-2 mt-6">
+                        <button type="button" onclick="closeSidebar()" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                        <button type="button" onclick="saveEmployee()" class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
+                    </div>
+                </form>
+           
+        </div>
+     
+        <script>
+    function closeSidebar() {
+        document.getElementById("employeeSidebar").classList.add("hidden");
+    }
+
+    function saveEmployee() {
+        alert("Employee details saved!");
+    }
+</script>
+
+        </body>
+        </html>

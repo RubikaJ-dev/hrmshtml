@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 transition-all duration-300">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md h-full p-5 flex flex-col justify-between transition-all duration-300">
+            <div>
+                <h1 class="text-2xl font-bold text-green-600">StaffX</h1>
+                <nav class="mt-5 space-y-2">
+                    <p class="text-gray-400 uppercase text-xs">General</p>
+                    <a href="index.html" class="flex items-center p-2 text-green-600 bg-green-100 rounded">
+                        <span class="mr-2">🏠</span> DashBoard
+                    </a>
+
+                    
+                    <!-- Employee Dropdown -->
+                    <div>
+                        <button class="menu-button flex justify-between w-full p-2 text-gray-700 hover:bg-green-100 rounded transition-all">
+                            <span><a href="employee.html" class="mr-2">👨‍💼 Employee</span>
+                            <!-- <span class="arrow transition-transform duration-300">▼</span> -->
+                        </button>
+                        <!-- <div class="submenu pl-6 mt-1 space-y-1">
+                            <a href="#" class="block text-gray-600 hover:text-green-600">Active Employees</a>
+                            <a href="#" class="block text-gray-600 hover:text-green-600">New Hires</a>
+                        </div> -->
+                    </div>
+
+                    <!-- Attendance Dropdown -->
+                    <!-- <div>
+                        <button class="menu-button flex justify-between w-full p-2 text-gray-700 hover:bg-green-100 rounded transition-all">
+                            <span><span class="mr-2">📅</span> Attendance</span>
+                            <span class="arrow transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="submenu pl-6 mt-1 space-y-1">
+                            <a href="#" class="block text-gray-600 hover:text-green-600">Daily Report</a>
+                            <a href="#" class="block text-gray-600 hover:text-green-600">Leave Requests</a>
+                            <a href="#" class="block text-gray-600 hover:text-green-600">Monthly Report</a>
+                        </div>
+                    </div> -->
+
+                    <!-- <p class="text-gray-400 uppercase text-xs mt-4">Management</p>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-green-100 rounded transition-all">
+                        <span class="mr-2">🛠</span> Jobs
+                    </a>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-green-100 rounded transition-all">
+                        <span class="mr-2">👥</span> Candidates
+                    </a>
+                    <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-green-100 rounded transition-all">
+                        <span class="mr-2">📆</span> Calendar
+                    </a>
+                </nav>
+            </div> -->
+
+            <!-- Dark Mode Toggle
+            <div class="mt-4">
+                <p class="text-gray-400 uppercase text-xs">Appearance</p>
+                <button id="darkModeToggle" class="flex items-center p-2 text-gray-700 hover:bg-green-100 rounded transition-all">
+                    <span class="mr-2">🌞 / 🌙</span> Toggle Theme
+                </button>
+            </div> -->
+        </aside>
+    </div>    
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.addEventListener("click", function (event) {
+            // Check if the clicked element is a menu button
+            if (event.target.closest(".menu-button")) {
+                let button = event.target.closest(".menu-button");
+                let submenu = button.nextElementSibling;
+                let arrow = button.querySelector(".arrow");
+
+                if (!submenu) return;
+
+                // Toggle visibility
+                submenu.classList.toggle("hidden");
+                arrow.classList.toggle("rotate-180");
+            }
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        darkModeToggle.addEventListener("click", function () {
+            document.body.classList.toggle("bg-gray-900");
+            document.body.classList.toggle("text-white");
+
+            // Sidebar color change
+            const sidebar = document.querySelector("aside");
+            sidebar.classList.toggle("bg-gray-800");
+
+            // Text color adjustments
+            document.querySelectorAll(".menu-item, .menu-button").forEach(el => {
+                el.classList.toggle("text-white");
+            });
+
+            document.querySelectorAll(".submenu a").forEach(el => {
+                el.classList.toggle("text-gray-300");
+            });
+
+            // Adjust hover colors
+            document.querySelectorAll(".menu-item, .menu-button").forEach(el => {
+                el.classList.toggle("hover:bg-gray-700");
+            });
+
+            document.querySelectorAll(".submenu a").forEach(el => {
+                el.classList.toggle("hover:text-white");
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>

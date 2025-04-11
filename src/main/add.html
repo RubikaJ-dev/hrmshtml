@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HRMS Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex bg-green-100 h-screen font-sans">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-md p-5 flex flex-col justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-green-600">StaffX</h1>
+      <nav class="mt-5 space-y-2">
+        <p class="text-gray-400 uppercase text-xs">General</p>
+        <a href="index.html" class="flex items-center p-2 text-green-600 bg-green-100 rounded">
+          <span class="mr-2">🏠</span> Dashboard
+        </a>
+        <a href="employee.html" class="flex items-center p-2 text-gray-700 hover:bg-green-100 rounded">
+          <span class="mr-2">👨‍💼</span> Employee
+        </a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 p-6 min-h-screen">
+
+    <!-- Add Employee Section -->
+    <section class="bg-white p-6 rounded shadow-md w-full h-full mb-8">
+      <h2 class="text-lg font-semibold mb-4">Add Employee</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <input type="text" id="name" placeholder="Name" class="border p-2 rounded">
+        <input type="text" id="designation" placeholder="Designation" class="border p-2 rounded">
+        <input type="text" id="department" placeholder="Department" class="border p-2 rounded">
+        <input type="text" id="date" placeholder="DOB" class="border p-2 rounded">
+        <input type="text" id="primaryphone" placeholder="Primary Phone" class="border p-2 rounded">
+        <input type="text" id="secondaryphone" placeholder="Secondary Phone" class="border p-2 rounded">
+        <input type="text" id="address" placeholder="Address" class="border p-2 rounded">
+        <input type="text" id="City" placeholder="City" class="border p-2 rounded">
+        <input type="text" id="State" placeholder="State" class="border p-2 rounded">
+        <input type="text" id="empDegree" placeholder="Highest Degree" class="border p-2 rounded">
+        <input type="text" id="empPrevEmployment" placeholder="Company Name" class="border p-2 rounded">
+        <input type="number" id="empCtc" placeholder="Current CTC" class="border p-2 rounded">
+        <input type="file" id="empCertifications" multiple accept=".pdf,.doc,.docx" class="border p-2 rounded">
+      </div>
+      <button onclick="addEmployee()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Add Employee</button>
+    </section>
+  </main>
+<!-- Edit Employee Section
+
+<div id="sidebar" class="w-full md:w-1/3 lg:w-1/4 bg-white p-4 rounded shadow-md h-full mt-10 self-start">
+    <h2 class="text-xl font-bold mb-4">Edit Employee</h2>
+    <input type="text" id="editName" placeholder="Name" class="w-full mb-2 p-2 border rounded text-black">
+    <input type="text" id="editDesignation" placeholder="Designation" class="w-full mb-2 border p-2 rounded text-black">
+    <input type="text" id="editDepartment" placeholder="Department" class="w-full mb-2 p-2 border rounded text-black">
+    <div class="flex justify-center">
+      <button id="saveButton" class="w-1/2 bg-green-500 text-white py-2 px-6 rounded">Save</button>
+    </div> -->
+</div>
+  <script>
+    function addEmployee() {
+      const name = document.getElementById("name").value;
+      const designation = document.getElementById("designation").value;
+      const department = document.getElementById("department").value;
+
+      if (name && designation && department) {
+        const table = document.getElementById("employeeTable").getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+
+        newRow.innerHTML = `
+          <td class="border px-4 py-2">${name}</td>
+          <td class="border px-4 py-2">${designation}</td>
+          <td class="border px-4 py-2">${department}</td>
+          <td class="border px-4 py-2">
+            <button class="bg-blue-500 text-white px-2 py-1 rounded" onclick="editRow(this)">Edit</button>
+          </td>
+        `;
+
+        document.getElementById("name").value = "";
+        document.getElementById("designation").value = "";
+        document.getElementById("department").value = "";
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+
+    function editRow(button) {
+      const row = button.closest("tr");
+      const cells = row.querySelectorAll("td");
+
+      document.getElementById("editName").value = cells[0].innerText;
+      document.getElementById("editDesignation").value = cells[1].innerText;
+      document.getElementById("editDepartment").value = cells[2].innerText;
+
+      document.getElementById("saveButton").onclick = function () {
+        saveRow(row);
+      };
+    }
+
+    function saveRow(row) {
+      const cells = row.querySelectorAll("td");
+
+      cells[0].innerText = document.getElementById("editName").value;
+      cells[1].innerText = document.getElementById("editDesignation").value;
+      cells[2].innerText = document.getElementById("editDepartment").value;
+    }
+  </script>
+</body>
+</html>
